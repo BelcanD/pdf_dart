@@ -1,11 +1,11 @@
 {
-    "name": "html_to_pdf_converter",
-    "short_name": "html_to_pdf_converter",
+    "name": "HTML to PDF Converter",
+    "short_name": "HTML2PDF",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "A Flutter web application for converting HTML to PDF with CSS support.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -53,8 +53,25 @@
   </script>
   <!-- This script adds the flutter initialization JS code -->
   <script src="flutter.js" defer></script>
+  <style>
+    .loading {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+    .error {
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+  <div id="loading" class="loading">
+    <h2>Loading...</h2>
+    <div id="error" class="error"></div>
+  </div>
   <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -65,7 +82,17 @@
         onEntrypointLoaded: function(engineInitializer) {
           engineInitializer.initializeEngine().then(function(appRunner) {
             appRunner.runApp();
+            // Скрываем индикатор загрузки после успешной инициализации
+            document.getElementById('loading').style.display = 'none';
+          }).catch(function(error) {
+            // Показываем ошибку, если что-то пошло не так
+            console.error('Error initializing Flutter:', error);
+            document.getElementById('error').textContent = 'Error initializing application: ' + error;
           });
+        },
+        onError: function(error) {
+          console.error('Error loading Flutter:', error);
+          document.getElementById('error').textContent = 'Error loading application: ' + error;
         }
       });
     });

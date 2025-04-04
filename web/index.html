@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>HTML to PDF Converter</title>
+  <!-- Подключаем библиотеку html2pdf.js для конвертации HTML в PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script>
+    // Функция для генерации PDF из HTML-контента
+    function generatePdf(htmlContent) {
+      // Создаем временный div для конвертации
+      const element = document.createElement('div');
+      element.innerHTML = htmlContent;
+      document.body.appendChild(element);
+
+      // Настройки для конвертации
+      const opt = {
+        margin: 0,                    // Отступы
+        filename: 'document.pdf',     // Имя файла
+        image: { 
+          type: 'jpeg',              // Тип изображения
+          quality: 1                  // Качество изображения
+        },
+        html2canvas: { 
+          scale: 2,                   // Масштаб
+          logging: false,             // Отключение логирования
+          useCORS: true              // Использование CORS
+        },
+        jsPDF: { 
+          unit: 'mm',                // Единицы измерения
+          format: 'a4',              // Формат страницы
+          orientation: 'portrait'     // Ориентация
+        }
+      };
+
+      // Конвертация и сохранение PDF
+      return html2pdf()
+        .set(opt)
+        .from(element)
+        .save()
+        .then(() => {
+          // Удаляем временный div после конвертации
+          document.body.removeChild(element);
+        });
+    }
+  </script>
+</head>
+<body>
+  <!-- Подключаем скомпилированный Dart-код -->
+  <script src="main.dart.js" type="application/javascript"></script>
+</body>
+</html>
